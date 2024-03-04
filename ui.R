@@ -2,6 +2,7 @@ library(shiny)
 library(plotly)
 
 ## OVERVIEW TAB INFO
+
 overview_tab <- tabPanel("Spotify Music Analysis Charting Analysis",
                          h1("by. Group "),
                          p("Music is a common interest for everyone, and often
@@ -10,19 +11,19 @@ overview_tab <- tabPanel("Spotify Music Analysis Charting Analysis",
                            generations. For example, glam metal, eurobeats, rock,
                            and much more electronic sounding music started to be
                            more prevalent as the 80's and 90's passed."),
-                           
-                          p("Today, the music scene looks entirely different, where you
+                         
+                         p("Today, the music scene looks entirely different, where you
                            have new genres like dubstep in the 2010's era. Others are
                            a fusion of genres or inspired by other music."),
-                           
-                          p("The Western music industry has always dominated globally
+                         
+                         p("The Western music industry has always dominated globally
                            whether they be from Europe or the Americas. However, post
                            2015, a new wave of artist based in Asia would blow up in
                            popularity. This is evident by the rise of Asian culture being
                            more prevalent in media. Things like KPop, anime, games, culture
                            and more are being rapidly introduced to the Western world."),
-                           
-                          p("We wanted to analyze the trends of things such as the popularity
+                         
+                         p("We wanted to analyze the trends of things such as the popularity
                            in the music industry, and how trends change over time in such a
                            way that groups that weren't represented prior in such a Western
                            dominated industry.")
@@ -31,14 +32,12 @@ overview_tab <- tabPanel("Spotify Music Analysis Charting Analysis",
 ## VIZ 1 TAB INFO
 viz_1_sidebar <- sidebarPanel(
   h2("Options for graph"),
-  selectizeInput("viz1_option", "Select Option", choices = unique(spotify_songs_time_df$Continent),
-                 multiple = TRUE
-  )
+  selectInput("viz1_option", "Select Option", choices = unique(spotify_songs_time_df$Continent))
 )
 
 viz_1_main_panel <- mainPanel(
   h2("Song Popularity Based on Country"),
-  plotlyOutput(outputId = "viz1_output")
+  plotOutput(outputId = "viz1_output")
 )
 
 viz_1_tab <- tabPanel("Song Popularity Tab",
@@ -56,7 +55,7 @@ viz_2_sidebar <- sidebarPanel(
 
 viz_2_main_panel <- mainPanel(
   h2("Average Popularity by Continent Over Time"),
-  plotlyOutput(outputId = "viz2_output")
+  plotOutput(outputId = "viz2_output")
 )
 
 viz_2_tab <- tabPanel("Average Popularity Over Time",
@@ -74,7 +73,7 @@ viz_3_sidebar <- sidebarPanel(
 
 viz_3_main_panel <- mainPanel(
   h2("Average Popularity of Artists from Asia and US Over the Years"),
-  plotlyOutput(outputId = "viz3_output")
+  plotOutput(outputId = "viz3_output")
 )
 
 viz_3_tab <- tabPanel("Average Popularity of Artists Tab",
@@ -85,13 +84,13 @@ viz_3_tab <- tabPanel("Average Popularity of Artists Tab",
 )
 
 ## CONCLUSIONS TAB INFO
-conclusion_tab <- tabPanel("Spotify Music Charting Analysis Conclusion",
-                           h1("Conclusions and Thoughts"),
+conclusion_tab <- tabPanel("Conclusion Tab Title",
+                           h1("Some title"),
                            p("some conclusions")
 )
 
 ## Shiny App UI
-ui <- navbarPage("Music Analysis App",
+ui <- navbarPage("Example Project Title",
                  overview_tab,
                  viz_1_tab,
                  viz_2_tab,

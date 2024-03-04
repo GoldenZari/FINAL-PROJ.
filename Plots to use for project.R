@@ -1,5 +1,8 @@
 library(dplyr)
 library(ggplot2)
+library(plotly)
+
+update.packages(ask = FALSE, checkBuilt = TRUE)
 
 spotify_songs_time_df <- read.csv("C:/Users/szyan/OneDrive/Desktop/INFO 201/Group Project Ver 2/spotify_songs_time_df.csv")
 
