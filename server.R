@@ -7,38 +7,37 @@ library(plotly)
 spotify_songs_time_df <- read.csv("C:/Users/szyan/OneDrive/Desktop/INFO 201/Group Project Ver 2/spotify_songs_time_df.csv")
 
 # server area
-server <- function(input, output) {
+server <- function(input, output, session) {
   
-  output$country_plot <- renderPlot({
-    ggplot(spotify_songs_time_df %>%
-             filter(Continent %in% input$viz1_option),  # Correct input ID here
-           aes(x = Continent, y = Popularity, fill = Continent)) +
-      geom_bar(stat = "identity") +
-      labs(title = "Song Popularity Based on Country",
-           x = "Continent",
-           y = "Popularity")
-  })
-  
-  output$time_plot <- renderPlot({
-    ggplot(spotify_songs_time_df %>%
-             filter(Continent %in% input$viz1_option),  # Correct input ID here
-           aes(x = Album.Date, y = Popularity, color = Continent)) +
-      geom_line() +
-      labs(title = "Average Popularity by Continent Over Time",
-           x = "Album Date",
-           y = "Popularity",
-           color = "Continent")
-  })
-  
-  output$continent_plot <- renderPlot({
+  ## VIZ 1
+  output$viz1_output <- renderPlotly({
     filtered_df <- spotify_songs_time_df %>%
-      filter(Continent %in% input$viz1_option)  # Correct input ID here
+      filter(Continent == input$viz1_option)
+    
+    plot_ly(data = filtered_df, x = ~Continent, y = ~Popularity, type = "bar", color = ~Continent) %>%
+      layout(barmode = "group")
+  })
+  
+  ## VIZ 2
+  output$viz2_output <- renderPlotly({
+    filtered_df <- spotify_songs_time_df %>%
+      group_by(Album.Date, Continent) %>%
+      summarise(Avg_Popularity = round(mean(Popularity)))
+    
+    plot_ly(data = filtered_df, x = ~Album.Date, y = ~Avg_Popularity, type = "scatter", mode = "lines", color = ~Continent)
+    })
+  }
+  
+  ## VIZ 3
+  output$viz3_output <- renderPlotly({
+    filtered_df <- spotify_songs_time_df %>%
+      filter(Continent %in% c("Asia", "North America"))
     
     popularity_by_year <- filtered_df %>%
       group_by(Album.Date, Continent) %>%
       summarise(Avg_Popularity = round(mean(Popularity)))
     
-    ggplot(popularity_by_year, aes(x = Album.Date, y = Avg_Popularity, color = Continent)) +
+    plot_ly(popularity_by_year, aes(x = ~Album.Date, y = ~Avg_Popularity, color = ~Continent)) +
       geom_line() +
       labs(title = "Average Popularity of Artists from Asia and US Over the Years",
            x = "Year",
@@ -46,4 +45,3 @@ server <- function(input, output) {
            color = "Continent") +
       theme(legend.position = "top")
   })
-}
