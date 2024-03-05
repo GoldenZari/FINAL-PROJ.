@@ -1,10 +1,11 @@
 library(shiny)
 library(plotly)
+library(ggplot2)
 
 ## OVERVIEW TAB INFO
 
 overview_tab <- tabPanel("Spotify Music Analysis Charting Analysis",
-                         h1("by. Group "),
+                         h1("by. Group B1"),
                          p("Music is a common interest for everyone, and often
                            the tastes for everyone changes as time progresses.
                            Certain genres obtain popularity with certain
@@ -32,12 +33,14 @@ overview_tab <- tabPanel("Spotify Music Analysis Charting Analysis",
 ## VIZ 1 TAB INFO
 viz_1_sidebar <- sidebarPanel(
   h2("Options for graph"),
-  selectInput("viz1_option", "Select Option", choices = unique(spotify_songs_time_df$Continent))
+  selectInput("viz1_option", "Select Option",
+              choices = unique(spotify_songs_time_df$Continent),
+              multiple = TRUE)
 )
 
 viz_1_main_panel <- mainPanel(
   h2("Song Popularity Based on Country"),
-  plotOutput(outputId = "viz1_output")
+  plotlyOutput(outputId = "viz1_output")
 )
 
 viz_1_tab <- tabPanel("Song Popularity Tab",
@@ -50,7 +53,9 @@ viz_1_tab <- tabPanel("Song Popularity Tab",
 ## VIZ 2 TAB INFO
 viz_2_sidebar <- sidebarPanel(
   h2("Options for graph"),
-  sliderInput("viz2_slider", "Select Value", min = 1, max = 10, value = 5)
+  selectInput("viz2_option", "Select Continent",
+              choices = unique(spotify_songs_time_df$Continent),
+              multiple = TRUE)
 )
 
 viz_2_main_panel <- mainPanel(
@@ -68,7 +73,9 @@ viz_2_tab <- tabPanel("Average Popularity Over Time",
 ## VIZ 3 TAB INFO
 viz_3_sidebar <- sidebarPanel(
   h2("Options for graph"),
-  # TODO: Put inputs for modifying graph here
+  selectInput("viz3_option", "Select Region(s)",
+              choices = unique(spotify_songs_time_df$Continent),
+              multiple = TRUE)
 )
 
 viz_3_main_panel <- mainPanel(
@@ -90,7 +97,7 @@ conclusion_tab <- tabPanel("Conclusion Tab Title",
 )
 
 ## Shiny App UI
-ui <- navbarPage("Example Project Title",
+ui <- navbarPage("Music Analysis Over Time",
                  overview_tab,
                  viz_1_tab,
                  viz_2_tab,
