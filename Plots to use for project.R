@@ -11,13 +11,6 @@ ggplot(spotify_songs_time_df, aes(x = Continent, y = Popularity, color = Contine
        y = "Popularity") +
   scale_fill_manual(values = rainbow(length(unique(spotify_songs_time_df$Continent))))
 
-ggplot(spotify_songs_time_df, aes(x = Album.Date, y = Popularity, color = Continent)) +
-  geom_line(na.rm = TRUE) +
-  labs(title = "Average Popularity by Continent Over Time",
-       x = "Album Release Date",
-       y = "Popularity",
-       color = "Continent")
-
 filtered_df <- spotify_songs_time_df %>%
   filter(Continent %in% c("Asia", "North America"))
 
@@ -31,4 +24,22 @@ ggplot(popularity_by_year, aes(x = Album.Date, y = Avg_Popularity, color = Conti
        x = "Year",
        y = "Average Popularity",
        color = "Continent") +
+  theme(legend.position = "top")
+
+ggplot(filtered_df, aes(x = Continent, y = Popularity, fill = Continent)) +
+  geom_boxplot() +
+  labs(title = "Popularity Distribution by Continent", x = "Continent", y = "Popularity") +
+  theme(legend.position = "none")
+
+popularity_by_genre_year <- spotify_songs_time_df %>%
+  group_by(Album.Date, Genres) %>%
+  summarise(Avg_Popularity = mean(Popularity))
+
+ggplot(popularity_by_genre_year) +
+  geom_line(aes(x = Album.Date, y = Avg_Popularity, color = Genres), size = 1.2) +
+  labs(title = "Average Popularity of Selected Genres Over the Years",
+       x = "Year",
+       y = "Average Popularity",
+       color = "Genres") +
+  theme_minimal() +
   theme(legend.position = "top")

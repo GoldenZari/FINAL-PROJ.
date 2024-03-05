@@ -29,20 +29,22 @@ server <- function(input, output) {
   ## Visualization 2
   output$viz2_output <- renderPlotly({
     filtered_df <- spotify_songs_time_df %>%
-      filter(Continent %in% input$viz2_option)
+      filter(Genres %in% input$viz2_option)
     
-    gg2 <- ggplot(spotify_songs_time_df) +
-        geom_line(na.rm = TRUE,
-                  aes(x = Album.Date,
-                      y = Popularity,
-                      color = Continent)) +
-        labs(title = "Average Popularity by Continent Over Time",
-             x = "Album Date",
-             y = "Popularity",
-             color = "Continent")
+    gg2 <- ggplot(filtered_df, aes(x = Genres, y = Popularity, fill = Genres)) +
+      geom_boxplot() +
+      labs(title = "Popularity Distribution by Genre",
+           x = "Genre",
+           y = "Popularity") +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8),
+            axis.text.y = element_text(size = 8),
+            legend.text = element_text(size = 8))
+    
+    ggsave("boxplot.png", height = 5, width = 8, dpi = 300)
     print(gg2)
     return(ggplotly(gg2))
   })
+  
   
   ## Visualization 3
   output$viz3_output <- renderPlotly({
@@ -55,15 +57,16 @@ server <- function(input, output) {
     
     
     gg3 <- ggplot(popularity_by_year) +
-           geom_line(na.rm = TRUE,
-                     aes(x = Album.Date,
-                         y = Avg_Popularity,
-                         color = Continent)) +
-           labs(title = "Average Popularity of Artists from Asia vs. US Over the Years",
-                x = "Year",
-                y = "Average Popularity",
-                color = "Continent") +
-                theme(legend.position = "top")
+      geom_line(aes(x = Album.Date,
+                    y = Avg_Popularity,
+                    color = Continent),
+                size = 1.2) +
+      labs(title = "Average Popularity of Artists from Selected Region(s) Over the Years",
+           x = "Year",
+           y = "Average Popularity",
+           color = "Continent") +
+      theme_minimal() +
+      theme(legend.position = "top")
     print(gg3)
     return(ggplotly(gg3))
   })

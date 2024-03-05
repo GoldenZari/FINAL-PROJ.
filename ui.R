@@ -53,17 +53,17 @@ viz_1_tab <- tabPanel("Song Popularity Tab",
 ## VIZ 2 TAB INFO
 viz_2_sidebar <- sidebarPanel(
   h2("Options for graph"),
-  selectInput("viz2_option", "Select Continent",
-              choices = unique(spotify_songs_time_df$Continent),
+  selectInput("viz2_option", "Select Genres",
+              choices = unique(spotify_songs_time_df$Genres),
               multiple = TRUE)
 )
 
 viz_2_main_panel <- mainPanel(
-  h2("Average Popularity by Continent Over Time"),
-  plotOutput(outputId = "viz2_output")
+  h2("Popularity Distribution by Genres"),
+  plotlyOutput(outputId = "viz2_output")
 )
 
-viz_2_tab <- tabPanel("Average Popularity Over Time",
+viz_2_tab <- tabPanel("Distribution by Genres",
                       sidebarLayout(
                         viz_2_sidebar,
                         viz_2_main_panel
@@ -79,8 +79,8 @@ viz_3_sidebar <- sidebarPanel(
 )
 
 viz_3_main_panel <- mainPanel(
-  h2("Average Popularity of Artists from Asia and US Over the Years"),
-  plotOutput(outputId = "viz3_output")
+  h2("Average Popularity of Artists from Various Regions Over the Years"),
+  plotlyOutput(outputId = "viz3_output")
 )
 
 viz_3_tab <- tabPanel("Average Popularity of Artists Tab",
@@ -89,11 +89,12 @@ viz_3_tab <- tabPanel("Average Popularity of Artists Tab",
                         viz_3_main_panel
                       )
 )
+                      
 
 ## CONCLUSIONS TAB INFO
-conclusion_tab <- tabPanel("Conclusion Tab Title",
-                           h1("Some title"),
-                           p("some conclusions")
+conclusion_tab <- tabPanel(("Charting Analysis Conclusions"),
+                           h1("Have Tastes Changed Over Time?"),
+                           p("Over time, we have seen that ")
 )
 
 ## Shiny App UI
