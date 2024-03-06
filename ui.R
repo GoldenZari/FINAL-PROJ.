@@ -100,7 +100,7 @@ conclusion_tab <- tabPanel(
     dominated industry."), 
   p("Over time, we have seen that what really determines the 
     popularity of music (the trend setter if you will) is determined mostly by Europe, 
-    followed by Asia. In the next page, we can see that ....Moving on to the thrid tab,
+    followed by Asia. In the next page, we can see that ....Moving on to the third chart,
     we can see that Australia, Africa, and Asia are the 
     top continents play a huge role in the popularity worldwide!")
 )
