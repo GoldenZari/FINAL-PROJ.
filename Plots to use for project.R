@@ -2,7 +2,7 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 
-spotify_songs_time_df <- read.csv("C:/Users/szyan/OneDrive/Desktop/INFO 201/Group Project Ver 3/spotify_songs_time_df.csv")
+spotify_songs_time_df <- read.csv("spotify_songs_time_df.csv")
 
 ggplot(spotify_songs_time_df, aes(x = Continent, y = Popularity, color = Continent)) +
   geom_bar(stat = "identity") +
@@ -32,14 +32,17 @@ ggplot(filtered_df, aes(x = Continent, y = Popularity, fill = Continent)) +
   theme(legend.position = "none")
 
 popularity_by_genre_year <- spotify_songs_time_df %>%
-  group_by(Album.Date, Genres) %>%
+  group_by(Album.Date, Parent.Genres) %>%
   summarise(Avg_Popularity = mean(Popularity))
 
 ggplot(popularity_by_genre_year) +
-  geom_line(aes(x = Album.Date, y = Avg_Popularity, color = Genres), size = 1.2) +
+  geom_line(aes(x = Album.Date, 
+                y = Avg_Popularity, 
+                color = Parent.Genres), 
+            size = 1.2) +
   labs(title = "Average Popularity of Selected Genres Over the Years",
        x = "Year",
        y = "Average Popularity",
-       color = "Genres") +
+       color = "Parent.Genres") +
   theme_minimal() +
   theme(legend.position = "top")

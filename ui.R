@@ -5,7 +5,7 @@ library(ggplot2)
 ## OVERVIEW TAB INFO
 
 overview_tab <- tabPanel("Spotify Music Analysis Charting Analysis",
-                         h1("by. Group B1"),
+                         h1("By Group BF1"),
                          p("Music is a common interest for everyone, and often
                            the tastes for everyone changes as time progresses.
                            Certain genres obtain popularity with certain
@@ -54,7 +54,7 @@ viz_1_tab <- tabPanel("Song Popularity Tab",
 viz_2_sidebar <- sidebarPanel(
   h2("Options for graph"),
   selectInput("viz2_option", "Select Genres",
-              choices = unique(spotify_songs_time_df$Genres),
+              choices = unique(spotify_songs_time_df$Parent.Genres),
               multiple = TRUE)
 )
 
@@ -83,7 +83,7 @@ viz_3_main_panel <- mainPanel(
   plotlyOutput(outputId = "viz3_output")
 )
 
-viz_3_tab <- tabPanel("Average Popularity of Artists Tab",
+viz_3_tab <- tabPanel("Average Popularity of Artists",
                       sidebarLayout(
                         viz_3_sidebar,
                         viz_3_main_panel
@@ -92,9 +92,17 @@ viz_3_tab <- tabPanel("Average Popularity of Artists Tab",
                       
 
 ## CONCLUSIONS TAB INFO
-conclusion_tab <- tabPanel(("Charting Analysis Conclusions"),
-                           h1("Have Tastes Changed Over Time?"),
-                           p("Over time, we have seen that ")
+conclusion_tab <- tabPanel(
+  ("Charting Analysis Conclusions"),
+  h1("Have Tastes Changed Over Time?"),
+  p("As we stated in the first page, we wanted to analyze how trends change over 
+    time in such way that groups that were not represented prior in such a Western
+    dominated industry."), 
+  p("Over time, we have seen that what really determines the 
+    popularity of music (the trend setter if you will) is determined mostly by Europe, 
+    followed by Asia. In the next page, we can see that ....Moving on to the thrid tab,
+    we can see that Australia, Africa, and Asia are the 
+    top continents play a huge role in the popularity worldwide!")
 )
 
 ## Shiny App UI

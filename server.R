@@ -2,8 +2,9 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 library(plotly)
+library(stringr)
 
-spotify_songs_time_df <- read.csv("C:/Users/szyan/OneDrive/Desktop/INFO 201/Group Project Ver 3/spotify_songs_time_df.csv")
+spotify_songs_time_df <- read.csv("spotify_songs_time_df.csv")
 
 server <- function(input, output) {
   
@@ -29,16 +30,15 @@ server <- function(input, output) {
   ## Visualization 2
   output$viz2_output <- renderPlotly({
     filtered_df <- spotify_songs_time_df %>%
-      filter(Genres %in% input$viz2_option)
+      filter(Parent.Genres %in% input$viz2_option)
     
-    gg2 <- ggplot(filtered_df, aes(x = Genres, y = Popularity, fill = Genres)) +
+    log_popularity <- log(filtered_df$Popularity)
+    
+    gg2 <- ggplot(filtered_df, aes(x = Parent.Genres, y = log_popularity, fill = Parent.Genres)) +
       geom_boxplot() +
       labs(title = "Popularity Distribution by Genre",
            x = "Genre",
-           y = "Popularity") +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8),
-            axis.text.y = element_text(size = 8),
-            legend.text = element_text(size = 8))
+           y = "Popularity")
     
     ggsave("boxplot.png", height = 5, width = 8, dpi = 300)
     print(gg2)
