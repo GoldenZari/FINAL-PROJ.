@@ -97,7 +97,27 @@ conclusion_tab <- tabPanel(
   h1("Have Tastes Changed Over Time?"),
   p("As we stated in the first page, we wanted to analyze how trends change over 
     time in such way that groups that were not represented prior in such a Western
-    dominated industry."), 
+    dominated industry."),
+  p("1) In the first graph, we've seen that Europe dominates in terms of popular songs.
+    This may be due to how their industry is advertised, and in recent years,
+    Eurovision (their most popular song contest across Europe and other participating countries)
+    has risen in popularity. However, we must also look at how colonialism and globalization
+    has affected the world. Despite Asia and Africa making up most of the population on Earth,
+    it seems that the level of popularity of songs overall only reach so high compared to Europe."),
+  p("2) If we also look at the genres, of course popular music will always dominate the charts.
+    But what truly defines a genre as popular? Genres that were popular a decade ago aren't
+    as popular among Spotify listeners these days. We also need to consider the mix of genres
+    for songs since many songs will be inspired by multiple elements and not just one particular genre."),
+  p("3) What causes the rise of certain music genres? Perhaps we can look to the events that surround
+    them over a timeline. In the first half of the line graph looking at artists, there's a steady
+    decline in most regions with the exception of Europe and Australia. But if we take a look at
+    the year of 2016, there's a sudden spike in the trend, especially for Asia. One point that I would
+    have to make about this is the introduction of KPop to the West. Back in 2012, Gangnam Style
+    was released by Korean Artist PSY, which had become the most viewed video at the time
+    and shattered world records. However, another group by the name of BTS in 2016 had also recently won
+    the top social artist at the BBMA's that year, causing a surge of popularity for the Asian music
+    industry overall. How have trends changed since then? We've seen rise in Asian cultures being
+    spotlighted more in media, pushing not only music, but food, culture and more."),
   p("Over time, we have seen that what really determines the 
     popularity of music (the trend setter if you will) is determined mostly by Europe, 
     followed by Asia. In the next page, we can see that ....Moving on to the third chart,
